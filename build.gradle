@@ -17,6 +17,8 @@ repositories {
 }
 
 dependencies {
+    // Gson 随插件自带，不再依赖 IDE 平台捆绑的版本（新版 IDE 可能移除或隔离第三方库）
+    implementation 'com.google.code.gson:gson:2.10.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     // https://mvnrepository.com/artifact/org.mockito/mockito-all
     testImplementation 'org.mockito:mockito-all:1.10.19'
@@ -25,9 +27,11 @@ dependencies {
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version = '2026.2'
-//    version = '2023.3.6'
+//    version = '2026.2'
+    version = '2023.3.6'
 //    version = '2024.3.7'
+    // 无 .form 文件，且插桩编译器需从 cache-redirector.jetbrains.com 下载（网络不可达），故关闭
+    instrumentCode = false
 }
 
 patchPluginXml {

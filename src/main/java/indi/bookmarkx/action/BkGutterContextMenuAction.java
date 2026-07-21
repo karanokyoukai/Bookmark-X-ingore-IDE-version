@@ -9,9 +9,9 @@ import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.ex.EditorGutterComponentEx;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import indi.bookmarkx.BookmarksManager;
-import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
@@ -42,7 +42,7 @@ public class BkGutterContextMenuAction extends AnAction {
         String lineText = document.getText().substring(document.getLineStartOffset(lineNum), document.getLineEndOffset(lineNum));
 
         BookmarksManager manager = BookmarksManager.getInstance(project);
-        manager.createBookRemark(project, file, StringUtils.trim(lineText), lineNum);
+        manager.createBookRemark(project, file, StringUtil.trim(lineText), lineNum);
 
         // 使文件标记失效并强制重新计算
         DaemonCodeAnalyzer daemonCodeAnalyzer = DaemonCodeAnalyzer.getInstance(project);

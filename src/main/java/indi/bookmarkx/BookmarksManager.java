@@ -29,7 +29,7 @@ import indi.bookmarkx.ui.pannel.BookmarksManagePanel;
 import indi.bookmarkx.ui.tree.BookmarkTreeNode;
 import indi.bookmarkx.utils.FileLineCounter;
 import indi.bookmarkx.utils.PersistenceUtil;
-import org.apache.commons.collections.CollectionUtils;
+import com.intellij.util.containers.ContainerUtil;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.tree.DefaultTreeModel;
@@ -253,8 +253,8 @@ public final class BookmarksManager {
                 // 初始化文件到标签签行缓存
                 reIntiFileMarksCache(root);
                 registerFileGutterIconListener();
-            } catch (Exception e) {
-                // 错误处理
+            } catch (Throwable e) {
+                // 错误处理（注意：NoClassDefFoundError 等 Error 也需要捕获，否则树加载会静默失败）
                 LOG.error("初始化标签树失败", e);
             }
             LOG.info("初始化标签树成功");
@@ -281,7 +281,7 @@ public final class BookmarksManager {
             VirtualFile[] openFiles = fileEditorManager.getOpenFiles();
             for (VirtualFile file : openFiles) {
                 Set<BookmarkNodeModel> models = bookmarksManager.fileMarksCache.getBookmarks(file.getPath());
-                if (CollectionUtils.isEmpty(models)) {
+                if (ContainerUtil.isEmpty(models)) {
                     return;
                 }
                 models.forEach(BookmarkNodeModel::createLineMarker);
@@ -294,7 +294,7 @@ public final class BookmarksManager {
                 @Override
                 public void fileOpened(@NotNull FileEditorManager source, @NotNull VirtualFile file) {
                     Set<BookmarkNodeModel> models = bookmarksManager.fileMarksCache.getBookmarks(file.getPath());
-                    if (CollectionUtils.isEmpty(models)) {
+                    if (ContainerUtil.isEmpty(models)) {
                         return;
                     }
                     models.forEach(BookmarkNodeModel::createLineMarker);
@@ -308,7 +308,7 @@ public final class BookmarksManager {
                     }
                     String path = file.getPath();
                     Set<BookmarkNodeModel> models = bookmarksManager.fileMarksCache.getBookmarks(path);
-                    if (CollectionUtils.isEmpty(models)) {
+                    if (ContainerUtil.isEmpty(models)) {
                         return;
                     }
                     models.forEach(BookmarkNodeModel::createLineMarker);

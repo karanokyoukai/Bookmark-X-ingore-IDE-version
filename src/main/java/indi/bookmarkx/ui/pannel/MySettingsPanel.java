@@ -1,6 +1,7 @@
 package indi.bookmarkx.ui.pannel;
 
 import com.intellij.openapi.ui.ComboBox;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.TitledSeparator;
 import com.intellij.ui.components.JBCheckBox;
 import com.intellij.ui.components.JBLabel;
@@ -12,7 +13,6 @@ import indi.bookmarkx.MySettingsConfigurable;
 import indi.bookmarkx.common.I18N;
 import indi.bookmarkx.common.I18NEnum;
 import indi.bookmarkx.persistence.MySettings;
-import org.apache.commons.lang.StringUtils;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -138,7 +138,7 @@ public class MySettingsPanel extends JBPanel<MySettingsPanel> {
             return -1;
         }
         String delay = jtfDelay.getText();
-        if (StringUtils.isBlank(delay)) {
+        if (StringUtil.isEmptyOrSpaces(delay)) {
             return 0;
         }
         return Integer.parseInt(delay);

@@ -10,7 +10,7 @@ import indi.bookmarkx.model.GroupNodeModel;
 import indi.bookmarkx.model.po.BookmarkPO;
 import indi.bookmarkx.ui.tree.BookmarkTree;
 import indi.bookmarkx.ui.tree.BookmarkTreeNode;
-import org.apache.commons.collections.CollectionUtils;
+import com.intellij.util.containers.ContainerUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +65,7 @@ public class PersistenceUtil {
         BookmarkTreeNode node = new BookmarkTreeNode(model);
 
         List<BookmarkPO> children = po.getChildren();
-        if (CollectionUtils.isEmpty(children)) {
+        if (ContainerUtil.isEmpty(children)) {
             return node;
         }
         for (BookmarkPO child : children) {

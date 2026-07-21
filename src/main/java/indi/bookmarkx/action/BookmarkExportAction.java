@@ -18,7 +18,7 @@ import com.intellij.openapi.wm.ToolWindowId;
 import indi.bookmarkx.common.I18N;
 import indi.bookmarkx.model.po.BookmarkPO;
 import indi.bookmarkx.persistence.MyPersistent;
-import org.apache.commons.collections.CollectionUtils;
+import com.intellij.util.containers.ContainerUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -128,7 +128,7 @@ public final class BookmarkExportAction extends AnAction {
         if (StringUtil.isNotEmpty(virtualFilePath)) {
             po.setVirtualFilePath(virtualFilePath.replace(dir, "$PROJECT_DIR$"));
         }
-        if (CollectionUtils.isNotEmpty(po.getChildren())) {
+        if (!ContainerUtil.isEmpty(po.getChildren())) {
             for (BookmarkPO child : po.getChildren()) {
                 stateTranslate(child, dir);
             }

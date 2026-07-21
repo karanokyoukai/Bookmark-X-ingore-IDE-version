@@ -5,12 +5,10 @@ import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.Service;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
+import com.intellij.openapi.util.text.StringUtil;
 import indi.bookmarkx.MySettingsConfigurable;
 import indi.bookmarkx.common.I18NEnum;
-import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
-
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * 插件持久化服务
@@ -29,7 +27,7 @@ public final class MySettings implements PersistentStateComponent<MySettings.Sta
 
     @Override
     public @NotNull State getState() {
-        if (StringUtils.isBlank(state.language)) {
+        if (StringUtil.isEmptyOrSpaces(state.language)) {
             state.language = I18NEnum.getDefault().name();
         }
         return state;
@@ -70,7 +68,6 @@ public final class MySettings implements PersistentStateComponent<MySettings.Sta
     }
 
 
-    @XmlRootElement
     public static class State {
         public String language;
         public int tipDelay;

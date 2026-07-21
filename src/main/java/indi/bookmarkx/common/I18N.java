@@ -2,7 +2,6 @@ package indi.bookmarkx.common;
 
 import com.intellij.AbstractBundle;
 import indi.bookmarkx.persistence.MySettings;
-import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 

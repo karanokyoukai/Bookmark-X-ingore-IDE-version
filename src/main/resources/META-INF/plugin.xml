@@ -31,7 +31,7 @@
                     icon="/icons/logo.svg"
                     factoryClass="indi.bookmarkx.RootWindowFactory"/>
 
-        <projectService serviceImplementation="indi.bookmarkx.persistence.MyPersistent"/>    <depends>org.intellij.plugins.markdown</depends>
+        <projectService serviceImplementation="indi.bookmarkx.persistence.MyPersistent"/>
 
 
         <editor.linePainter implementation="indi.bookmarkx.ui.painter.LineEndPainter"/>

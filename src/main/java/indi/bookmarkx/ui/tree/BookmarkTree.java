@@ -23,7 +23,6 @@ import indi.bookmarkx.ui.dialog.BookmarkCreatorDialog;
 import indi.bookmarkx.ui.dialog.LineAdjustDialog;
 import indi.bookmarkx.ui.pannel.BookmarkTipPanel;
 import indi.bookmarkx.utils.FileLineCounter;
-import org.apache.commons.lang3.Validate;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.DropMode;
@@ -537,7 +536,9 @@ public class BookmarkTree extends Tree implements BookmarkListener {
         }
 
         private void navigateTo(int index) {
-            Validate.isTrue(index >= 0, "index must be greater than 0");
+            if (index < 0) {
+                throw new IllegalArgumentException("index must be greater than 0");
+            }
 
             BookmarkTreeNode nextNode = (BookmarkTreeNode) activatedGroup.getChildAt(index);
             activeBookmark(nextNode);
@@ -552,7 +553,9 @@ public class BookmarkTree extends Tree implements BookmarkListener {
         }
 
         private int preTreeNodeIndex(BookmarkTreeNode activeGroup, BookmarkTreeNode activatedBookmark) {
-            Validate.isTrue(activeGroup.getBookmarkChildCount() > 0, "activeGroup has no child");
+            if (activeGroup.getBookmarkChildCount() <= 0) {
+                throw new IllegalArgumentException("activeGroup has no child");
+            }
             if (null == activatedBookmark) {
                 return activeGroup.firstChildIndex();
             }
@@ -568,7 +571,9 @@ public class BookmarkTree extends Tree implements BookmarkListener {
         }
 
         private int nextTreeNodeIndex(BookmarkTreeNode activeGroup, BookmarkTreeNode activatedBookmark) {
-            Validate.isTrue(activeGroup.getBookmarkChildCount() > 0, "activeGroup has no child");
+            if (activeGroup.getBookmarkChildCount() <= 0) {
+                throw new IllegalArgumentException("activeGroup has no child");
+            }
             if (null == activatedBookmark) {
                 return activeGroup.firstChildIndex();
             }
